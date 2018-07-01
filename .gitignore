@@ -64,3 +64,5 @@ packages/**
 typings/**
 .vscode/**
 .awcache/**
+
+/dist
