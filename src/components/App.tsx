@@ -1,7 +1,8 @@
 import * as React from 'react';
 //import { Button, ButtonType } from 'office-ui-fabric-react';
 import Header from './Header';
-import Progress from './Progress';
+//import Progress from './Progress';
+import UrlBox from './UrlBox';
 
 import * as OfficeHelpers from '@microsoft/office-js-helpers';
 
@@ -13,7 +14,7 @@ export interface AppProps {
 export interface AppState {    
 }
 
-export default class App extends React.Component<AppProps, AppState> {
+export default class App extends React.Component<AppProps, AppState> {    
     constructor(props, context) {
         super(props, context);
         this.state = {
@@ -55,26 +56,31 @@ export default class App extends React.Component<AppProps, AppState> {
     }
 
     render() {
-        const {
-            title,
-            isOfficeInitialized,
-        } = this.props;
+        // const {
+        //     title,
+        //     isOfficeInitialized,
+        // } = this.props;
 
-        if (!isOfficeInitialized) {
-            return (
-                <Progress
-                    title={title}
-                    logo='assets/logo-filled.png'
-                    message='Please sideload your addin to see app body.'
-                />
-            );
-        }
+        // if (!isOfficeInitialized) {
+        //     return (
+        //         <Progress
+        //             title={title}
+        //             logo='assets/logo-filled.png'
+        //             message='Please sideload your addin to see app body.'
+        //         />
+        //     );
+        // }
 
         return (
             <div className='ms-welcome'>
                 <Header logo='assets/logo-filled.png' title={this.props.title} message='Welcome' />
                 
+                <UrlBox onFaviconObtained={this.onFaviconObtained} />
             </div>
         );
+    }
+
+    onFaviconObtained(/*faviconUrl: string*/) {
+
     }
 }
