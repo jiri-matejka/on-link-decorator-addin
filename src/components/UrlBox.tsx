@@ -27,6 +27,7 @@ export default class UrlBox extends React.Component<UrlBoxProps, UrlBoxState> {
 		this.onTextFieldBlur = this.onTextFieldBlur.bind(this);
 		this.getHostName = this.getHostName.bind(this);
 		this.render = this.render.bind(this);
+		this.setStatusLoadingFailed = this.setStatusLoadingFailed.bind(this);
 	}
 
 	getHostName(href: string) {
@@ -54,7 +55,7 @@ export default class UrlBox extends React.Component<UrlBoxProps, UrlBoxState> {
 				onBlur={this.onTextFieldBlur} />
 		];	
 
-		return React.createElement("Fragment", null,
+		return React.createElement("React.Fragment", null,
 			this.state.isLoading ? textbox.concat([<Spinner size={SpinnerSize.medium} key="spinner" />]) : textbox 
 			)		
 	}
@@ -72,8 +73,19 @@ export default class UrlBox extends React.Component<UrlBoxProps, UrlBoxState> {
 	
 	}
 
+	setStatusLoadingFailed() {
+		this.setState({
+			faviconUrl: null,
+			isLoading: false,
+			isObtained: false,
+			isInvalidUrl: false,
+			isHttpError: true
+		});
+	}
+
 	onTextFieldBlur(newValue: React.FocusEvent<HTMLElement>) {		
-		const hostname = this.getHostName((newValue.currentTarget as HTMLInputElement).value);		
+		const url = (newValue.currentTarget as HTMLInputElement).value;
+		const hostname = this.getHostName(url);		
 		if(hostname === null) {
 			this.setState({
 				faviconUrl: null,
@@ -92,12 +104,18 @@ export default class UrlBox extends React.Component<UrlBoxProps, UrlBoxState> {
 				isHttpError: false
 			});
 			
-			fetch("https://favicongrabber.com/api/grab/" + hostname)
-			.then(function(response) {
-				return response.json();
+			var getFaviconPromise = fetch("https://favicongrabber.com/api/grab/" + hostname)
+			.then(function(response) {				
+				if(response.ok === true)				
+					return response.json();
+				else
+					return null;
 			}).then(function(response) {
-				const faviconUrl = this.pickFavicon(response);
-				pozor;: https://stackoverflow.com/questions/34930771/why-is-this-undefined-inside-class-method-when-using-promises
+				if(response === null) {
+					this.setStatusLoadingFailed();
+					return;
+				}
+				const faviconUrl = this.pickFavicon(response);				
 				this.setState({
 					faviconUrl: faviconUrl,
 					isLoading: false,
@@ -109,16 +127,20 @@ export default class UrlBox extends React.Component<UrlBoxProps, UrlBoxState> {
 				if(faviconUrl !== null) {
 					this.props.onFaviconObtained(faviconUrl);
 				}
-			}).catch(function(err) {
+			}.bind(this) // https://stackoverflow.com/questions/34930771/why-is-this-undefined-inside-class-method-when-using-promises
+			).catch(function(err) {
 				console.log("Error when obtaining favicon: ", err);
-				this.setState({
-					faviconUrl: null,
-					isLoading: false,
-					isObtained: false,
-					isInvalidUrl: false,
-					isHttpError: true
-				});
-			});
+				this.setStatusLoadingFailed();
+			}.bind(this));
+
+			
+			const getTitlePromise = fetch(url)
+			.then((response) => {
+				if(!response.ok)
+					return null;
+
+				
+			})
 
 	
 		}
