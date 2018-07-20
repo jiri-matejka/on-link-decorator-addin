@@ -80,7 +80,7 @@ export default class App extends React.Component<AppProps, AppState> {
         );
     }
 
-    onFaviconObtained(/*faviconUrl: string*/) {
-
+    onFaviconObtained(faviconUrl: string) {
+        faviconUrl = faviconUrl;
     }
 }
