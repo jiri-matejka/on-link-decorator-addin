@@ -7,6 +7,7 @@ export interface UrlBoxProps {
 
 interface UrlBoxState {
 	faviconUrl: string,
+	faviconData: string,
 	isLoading: boolean,
 	isObtained: boolean
 	isInvalidUrl: boolean,
@@ -18,6 +19,7 @@ export default class UrlBox extends React.Component<UrlBoxProps, UrlBoxState> {
         super(props, context);
         this.state = {
 			faviconUrl: null,
+			faviconData: null,
 			isLoading: false,
 			isObtained: false,
 			isInvalidUrl: false,
@@ -73,9 +75,29 @@ export default class UrlBox extends React.Component<UrlBoxProps, UrlBoxState> {
 	
 	}
 
+	postWithData = (url = ``, data = {}) => {
+		// Default options are marked with *
+		  return fetch(url, {
+			  method: "POST", // *GET, POST, PUT, DELETE, etc.
+			  mode: "cors", // no-cors, cors, *same-origin
+			  cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+			  credentials: "same-origin", // include, same-origin, *omit
+			  headers: {
+				  "Content-Type": "application/json; charset=utf-8",
+				  // "Content-Type": "application/x-www-form-urlencoded",
+			  },
+			  redirect: "follow", // manual, *follow, error
+			  referrer: "no-referrer", // no-referrer, *client
+			  body: JSON.stringify(data), // body data type must match "Content-Type" header
+		  })
+		  .then(response => response.json()) // parses response to JSON
+		  .catch(error => console.error(`Fetch Error =\n`, error));
+	  };
+
 	setStatusLoadingFailed() {
 		this.setState({
 			faviconUrl: null,
+			faviconData: null,
 			isLoading: false,
 			isObtained: false,
 			isInvalidUrl: false,
@@ -89,6 +111,7 @@ export default class UrlBox extends React.Component<UrlBoxProps, UrlBoxState> {
 		if(hostname === null) {
 			this.setState({
 				faviconUrl: null,
+				faviconData: null,
 				isLoading: false,
 				isObtained: false,
 				isInvalidUrl: true,
@@ -98,34 +121,38 @@ export default class UrlBox extends React.Component<UrlBoxProps, UrlBoxState> {
 		else {
 			this.setState({
 				faviconUrl: null,
+				faviconData: null,
 				isLoading: true,
 				isObtained: false,
 				isInvalidUrl: false,
 				isHttpError: false
 			});
 			
-			var getFaviconPromise = fetch("https://favicongrabber.com/api/grab/" + hostname)
-			.then(function(response) {				
-				if(response.ok === true)				
-					return response.json();
-				else
-					return null;
-			}).then(function(response) {
+			this.postWithData("https://localhost:53975/api/pageinfo", { address: url })
+				.then(function(response) {
 				if(response === null) {
 					this.setStatusLoadingFailed();
 					return;
 				}
-				const faviconUrl = this.pickFavicon(response);				
+				const {error, faviconData, title} = response;
+
+				if(error !== "") {
+					this.setStatusLoadingFailed();
+					console.log(error);
+					return;
+				}
+				
 				this.setState({
-					faviconUrl: faviconUrl,
+					faviconUrl: null,
+					faviconData: faviconData,
 					isLoading: false,
-					isObtained: faviconUrl !== null,
+					isObtained: faviconData !== undefined,
 					isInvalidUrl: false,
 					isHttpError: false
 				});
 
-				if(faviconUrl !== null) {
-					this.props.onFaviconObtained(faviconUrl);
+				if(faviconData !== undefined) {
+					this.props.onFaviconObtained(faviconData, title);
 				}
 			}.bind(this) // https://stackoverflow.com/questions/34930771/why-is-this-undefined-inside-class-method-when-using-promises
 			).catch(function(err) {
@@ -134,19 +161,14 @@ export default class UrlBox extends React.Component<UrlBoxProps, UrlBoxState> {
 			}.bind(this));
 
 			
-			const getTitlePromise = fetch(url)
-			.then((response) => {
-				if(!response.ok)
-					return null;
-
-				
-			})
+			
 
 	
 		}
 		
 	}
 
+	
 	
 
 	
