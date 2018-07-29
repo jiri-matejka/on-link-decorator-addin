@@ -128,13 +128,15 @@ export default class UrlBox extends React.Component<UrlBoxProps, UrlBoxState> {
 				isHttpError: false
 			});
 			
-			this.postWithData("https://localhost:53975/api/pageinfo", { address: url })
+			this.postWithData("https://onenoteutilities/AddinServices/api/pageinfo", { address: url })
 				.then(function(response) {
-				if(response === null) {
+				if(response === undefined) {
 					this.setStatusLoadingFailed();
 					return;
 				}
-				const {error, faviconData, title} = response;
+				const error = response.Error;
+				const faviconData = response.FaviconData;
+				const title = response.Title;
 
 				if(error !== "") {
 					this.setStatusLoadingFailed();
