@@ -136,6 +136,7 @@ export default class UrlBox extends React.Component<UrlBoxProps, UrlBoxState> {
 				}
 				const error = response.Error;
 				const faviconData = response.FaviconData;
+				const faviconMime = response.FaviconMime;
 				const title = response.Title;
 
 				if(error !== "") {
@@ -154,7 +155,7 @@ export default class UrlBox extends React.Component<UrlBoxProps, UrlBoxState> {
 				});
 
 				if(faviconData !== undefined) {
-					this.props.onFaviconObtained(faviconData, title);
+					this.props.onFaviconObtained(faviconData, faviconMime, title);
 				}
 			}.bind(this) // https://stackoverflow.com/questions/34930771/why-is-this-undefined-inside-class-method-when-using-promises
 			).catch(function(err) {
