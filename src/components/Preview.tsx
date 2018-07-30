@@ -18,9 +18,14 @@ export default class Preview extends React.Component<IPreviewProps> {
 
     render() {
 
-        return (<div className="preview">
-                <img src={ `data:${this.props.faviconMime};base64,${this.props.faviconData}` } />
-                <TextField  value={this.props.title} />
+        return (
+            <div>
+                <h2 className="ms-font-xxl">Preview</h2>
+                <div className="preview">
+                
+                    <img className="image" src={ `data:${this.props.faviconMime};base64,${this.props.faviconData}` } />
+                    <TextField className="title-box" value={this.props.title} borderless />
+                </div>
             </div>)
     }
 
