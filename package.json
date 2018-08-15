@@ -12,6 +12,7 @@
     },
     "dependencies": {
         "@microsoft/office-js-helpers": "^1.0.1",
+        "@types/react-redux": "^6.0.6",
         "@types/request-promise": "^4.1.42",
         "core-js": "^2.5.3",
         "office-ui-fabric-react": "^5.51.0",
