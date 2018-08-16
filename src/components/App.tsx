@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Button } from 'office-ui-fabric-react';
 import Header from './Header';
 import Preview from './Preview';
-import UrlBox from './UrlBox';
+import { UrlBoxContainer } from '../containers/UrlBoxContainer';
 
 
 import * as OfficeHelpers from '@microsoft/office-js-helpers';
@@ -68,7 +68,7 @@ export default class App extends React.Component<AppProps, AppState> {
         let elements = new Array(3);
 
         elements.push (<Header logo='assets/logo-filled.png' title={this.props.title} message='Welcome' />);
-        elements.push(<UrlBox onFaviconObtained={this.onFaviconObtained} />);
+        elements.push(<UrlBoxContainer />);
         if(haveFavicon) {
             elements.push(<Preview faviconData={this.state.faviconData} 
                 faviconMime={this.state.faviconMime} title={this.state.title} />);
