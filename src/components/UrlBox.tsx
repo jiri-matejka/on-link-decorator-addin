@@ -2,7 +2,8 @@ import * as React from 'react';
 import { TextField } from 'office-ui-fabric-react';
 
 export interface UrlBoxProps {
-    onFaviconObtained: any
+	onUrlEntered: any,
+	isUrlValid: boolean
 }
 
 interface UrlBoxState {
@@ -14,7 +15,7 @@ interface UrlBoxState {
 	isHttpError: boolean
 }
 
-export default class UrlBox extends React.Component<UrlBoxProps, UrlBoxState> {
+export class UrlBox extends React.Component<UrlBoxProps, UrlBoxState> {
     constructor(props, context) {
         super(props, context);
         this.state = {
@@ -27,38 +28,21 @@ export default class UrlBox extends React.Component<UrlBoxProps, UrlBoxState> {
 		};
 		
 		this.onTextFieldBlur = this.onTextFieldBlur.bind(this);
-		this.getHostName = this.getHostName.bind(this);
 		this.render = this.render.bind(this);
 		this.setStatusLoadingFailed = this.setStatusLoadingFailed.bind(this);
 	}
 
-	getHostName(href: string) {
-		var match = href.match(/^(https?\:)\/\/(([^:\/?#]*)(?:\:([0-9]+))?)([\/]{0,1}[^?#]*)(\?[^#]*|)(#.*|)$/);
-		if(!match)
-			return null;
-		else return match[2];
-		
-		// return match && {
-		//     href: href,
-		//     protocol: match[1],
-		//     host: match[2],
-		//     hostname: match[3],
-		//     port: match[4],
-		//     pathname: match[5],
-		//     search: match[6],
-		//     hash: match[7]
-		// }
-	}
+
 
 	render() {
 		
 		return (
 			<TextField label="Insert your hyperlink then click Paste" key="txtbox" 
-				errorMessage={this.state.isInvalidUrl ? "Url not valid" : (this.state.isHttpError ? "Could not obtain favicon" : null)} 
+				errorMessage={!this.props.isUrlValid ? "Url not valid" : null} 
 				onBlur={this.onTextFieldBlur} />
 		)
-		
 	}
+		
 
 	pickFavicon(faviconRecords) {
 		if(faviconRecords.icons.length == 0)
@@ -105,7 +89,12 @@ export default class UrlBox extends React.Component<UrlBoxProps, UrlBoxState> {
 
 	onTextFieldBlur(newValue: React.FocusEvent<HTMLElement>) {		
 		const url = (newValue.currentTarget as HTMLInputElement).value;
-		const hostname = this.getHostName(url);		
+
+		this.props.onUrlEntered(url);
+
+		return;
+
+		const hostname = null; //this.getHostName(url);		
 		if(hostname === null) {
 			this.setState({
 				faviconUrl: null,
