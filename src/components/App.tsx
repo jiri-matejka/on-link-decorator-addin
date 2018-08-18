@@ -68,10 +68,10 @@ export default class App extends React.Component<AppProps, AppState> {
 
         elements.push (<Header logo='assets/logo-filled.png' title={this.props.title} message='Welcome' />);
         elements.push(<UrlBox onFaviconObtained={this.onFaviconObtained} />);
-        if(haveFavicon) {
-            elements.push(<Preview faviconData={this.state.faviconData} 
-                faviconMime={this.state.faviconMime} title={this.state.title} />);
-        }
+       
+        elements.push(<Preview isVisible={haveFavicon} isLoading={false} faviconData={this.state.faviconData} 
+            faviconMime={this.state.faviconMime} title={this.state.title} />);
+    
         elements.push(<Button primary text="Insert" disabled={!haveFavicon} />)
 
 

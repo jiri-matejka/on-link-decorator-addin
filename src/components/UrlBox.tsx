@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Spinner, SpinnerSize, TextField } from 'office-ui-fabric-react';
+import { TextField } from 'office-ui-fabric-react';
 
 export interface UrlBoxProps {
     onFaviconObtained: any
@@ -51,15 +51,13 @@ export default class UrlBox extends React.Component<UrlBoxProps, UrlBoxState> {
 	}
 
 	render() {
-		let textbox = [
+		
+		return (
 			<TextField label="Insert your hyperlink then click Paste" key="txtbox" 
 				errorMessage={this.state.isInvalidUrl ? "Url not valid" : (this.state.isHttpError ? "Could not obtain favicon" : null)} 
 				onBlur={this.onTextFieldBlur} />
-		];	
-
-		return React.createElement("React.Fragment", null,
-			this.state.isLoading ? textbox.concat([<Spinner size={SpinnerSize.medium} key="spinner" />]) : textbox 
-			)		
+		)
+		
 	}
 
 	pickFavicon(faviconRecords) {
