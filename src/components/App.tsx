@@ -1,11 +1,12 @@
 import * as React from 'react';
 import { Button } from 'office-ui-fabric-react';
-import Header from './Header';
-import Preview from './Preview';
-import { UrlBoxContainer } from '../containers/UrlBoxContainer';
-
-
 import * as OfficeHelpers from '@microsoft/office-js-helpers';
+
+import Header from './Header';
+
+import { UrlBoxContainer } from '../containers/UrlBoxContainer';
+import { PreviewContainer } from '../containers/PreviewContainer';
+
 
 export interface AppProps {
     title: string
@@ -70,8 +71,9 @@ export default class App extends React.Component<AppProps, AppState> {
         elements.push (<Header logo='assets/logo-filled.png' title={this.props.title} message='Welcome' />);
 
         elements.push(<UrlBoxContainer />);
-        elements.push(<Preview isVisible={haveFavicon} isLoading={false} faviconData={this.state.faviconData} 
-            faviconMime={this.state.faviconMime} title={this.state.title} />);
+        // elements.push(<Preview isVisible={haveFavicon} isLoading={false} faviconData={this.state.faviconData} 
+        //     faviconMime={this.state.faviconMime} title={this.state.title} />);
+        elements.push(<PreviewContainer/>);
 
         elements.push(<Button primary text="Insert" disabled={!haveFavicon} />)
 

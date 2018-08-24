@@ -8,19 +8,18 @@ export enum FetchState {
 	NOT_STARTED = "NOT_STARTED",
 	FETCH_IN_PROGRESS = "FETCH_IN_PROGRESS",
 	FETCH_ERROR = "FETCH_ERROR",
-	FETCH_EMPTY = "FETCH_EMPTY",
 	FETCH_OK = "FETCH_OK"
 }
 
 export interface IAppState {
 	urlState: UrlState,
 	fetchState: FetchState,
-	fetchError: String,
-	url: String,
-	title: String,
-	fetchedTitle: String,
-	faviconData: String,
-	faviconMime: String	
+	fetchError: string,
+	url: string,
+	title: string,
+	fetchedTitle: string,
+	faviconData: string,
+	faviconMime: string	
 }
 
 export const initialState : IAppState = {

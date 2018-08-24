@@ -2,14 +2,25 @@ import * as React from 'react';
 import { Spinner, SpinnerSize, TextField } from 'office-ui-fabric-react';
 import './Preview.css';
 
-export interface IPreviewProps
+export interface IPreviewStaticProps
 {
     isLoading: boolean,
     isVisible: boolean,
+    isErrored: boolean,
+    hasFavicon: boolean,
     faviconData: string,
     faviconMime: string,
-    title: string
+    title: string,
+    error: string
 }
+
+export interface IPreviewDispatchProps {
+
+}
+
+interface IPreviewProps extends IPreviewStaticProps, IPreviewDispatchProps 
+{}
+
 
 export default class Preview extends React.Component<IPreviewProps> {
     
