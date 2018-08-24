@@ -50,7 +50,7 @@ export function fetchFavicon(url: String) {
 			}
 			).catch(function(err) {
 				console.log("Error when obtaining favicon: ", err);
-				this.setStatusLoadingFailed();
+				dispatch(faviconFetchFailed(err));
 			});
 
 	}
