@@ -32,26 +32,26 @@ export function invalidUrlEntered() {return { type: Actions.INVALID_URL_ENTERED}
 
 export interface IFaviconFetchStarted {
 	type: Actions.FAVICON_FETCH_STARTED,
-	url: String
+	url: string
 }
 
-export function faviconFetchStarted(url: String) { return {type: Actions.FAVICON_FETCH_STARTED, url: url}}
+export function faviconFetchStarted(url: string) { return {type: Actions.FAVICON_FETCH_STARTED, url: url}}
 
 export interface IFaviconFetchFailed {
 	type: Actions.FAVICON_FETCH_FAILED,
-	error: String
+	error: string
 }
 
-export function faviconFetchFailed(error: String) { return {type: Actions.FAVICON_FETCH_FAILED, error: error}}
+export function faviconFetchFailed(error: string) { return {type: Actions.FAVICON_FETCH_FAILED, error: error}}
 
 export interface IFaviconFetchCompleted {
 	type: Actions.FAVICON_FETCH_COMPLETED,
-	faviconData: String,
-	faviconMime: String,
-	title: String
+	faviconData: string,
+	faviconMime: string,
+	title: string
 }
 
-export function faviconFetchCompleted(faviconData: String, faviconMime: String, title: String) {
+export function faviconFetchCompleted(faviconData: string, faviconMime: string, title: string) {
 	return {
 		type: Actions.FAVICON_FETCH_COMPLETED,
 		faviconData: faviconData,

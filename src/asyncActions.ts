@@ -19,7 +19,7 @@ function postWithData (url = ``, data = {}) {
 	  .catch(error => console.error(`Fetch Error =\n`, error));
 }
 
-export function fetchFavicon(url: String) {
+export function fetchFavicon(url: string) {
 	return function(dispatch) {
 		
 		dispatch(faviconFetchStarted(url));
