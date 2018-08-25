@@ -7,6 +7,7 @@ import Header from './Header';
 import { UrlBoxContainer } from '../containers/UrlBoxContainer';
 import { PreviewContainer } from '../containers/PreviewContainer';
 
+import './AppStyles.css'
 
 export interface AppProps {
     title: string
@@ -59,7 +60,9 @@ export default class App extends React.Component<AppProps> {
         elements.push(<UrlBoxContainer />);
         elements.push(<PreviewContainer/>);
 
-        elements.push(<Button primary text="Insert" />)
+        
+
+        elements.push(<Button primary text="Insert" className="app-primary-button" />)
 
 
         return React.createElement("div", {className: "ms-welcome"}, elements);
