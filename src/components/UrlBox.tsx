@@ -6,13 +6,20 @@ export interface UrlBoxProps {
 	isUrlValid: boolean
 }
 
+interface IUrlBoxState {
+	lastUrl: string
+}
 
-export class UrlBox extends React.Component<UrlBoxProps> {
+export class UrlBox extends React.Component<UrlBoxProps, IUrlBoxState> {
     constructor(props, context) {
         super(props, context);
       
 		this.onTextFieldBlur = this.onTextFieldBlur.bind(this);
 		this.render = this.render.bind(this);
+
+		this.state = {
+			lastUrl: null
+		}
 	}
 
 	render() {
@@ -28,7 +35,11 @@ export class UrlBox extends React.Component<UrlBoxProps> {
 	onTextFieldBlur(newValue: React.FocusEvent<HTMLElement>) {		
 		const url = (newValue.currentTarget as HTMLInputElement).value;
 
-		this.props.onUrlEntered(url);	
+		if(this.state.lastUrl !== url)	{
+			this.setState({lastUrl: url});
+			this.props.onUrlEntered(url);	
+		}
+
 				
 	}
 
