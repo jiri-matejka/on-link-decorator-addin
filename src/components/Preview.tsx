@@ -33,8 +33,7 @@ export default class Preview extends React.Component<IPreviewProps> {
         if(!this.props.isVisible)
             return null;
 
-        return            
-            (
+        return  (
                 <div>
                     <h2 className="ms-font-xxl">Preview</h2>
                     <div className="preview">
