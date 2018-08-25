@@ -1,5 +1,7 @@
 import * as React from 'react';
 import { Spinner, SpinnerSize, TextField } from 'office-ui-fabric-react';
+import { MessageBar } from 'office-ui-fabric-react';
+
 import './Preview.css';
 
 export interface IPreviewStaticProps
@@ -36,17 +38,22 @@ export default class Preview extends React.Component<IPreviewProps> {
         return  (
                 <div>
                     <h2 className="ms-font-xxl">Preview</h2>
-                    <div className="preview">
-                        {this.props.isLoading && 
-                            <Spinner size={SpinnerSize.medium} key="spinner" label="Loading icon and title" />
-                        }
-                        {!this.props.isLoading && 
-                            <React.Fragment>
-                                <img className="image" src={ `data:${this.props.faviconMime};base64,${this.props.faviconData}` } />
-                                <TextField className="title-box" value={this.props.title} borderless autoFocus />
-                            </React.Fragment>
-                        }
-                    </div>
+                   
+                    {this.props.isLoading && 
+                        <Spinner size={SpinnerSize.medium} key="spinner" label="Loading icon and title" />
+                    }
+                    {this.props.isErrored &&
+                        <MessageBar className="message-bar">
+                            Icon not downloaded: { this.props.error }
+                        </MessageBar>                            
+                    }
+                    {!this.props.isLoading && 
+                        <div className="preview">
+                            <img className="image" src={ `data:${this.props.faviconMime};base64,${this.props.faviconData}` } />
+                            <TextField className="title-box" value={this.props.title} borderless autoFocus />
+                        </div>
+                    }
+                    
                 </div>)
     }
 
