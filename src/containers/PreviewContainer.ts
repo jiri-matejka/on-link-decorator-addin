@@ -31,10 +31,9 @@ function mapStateToProps(state : IAppState) : IPreviewStaticProps {
 		hasFavicon: state.faviconData !== null,
 		faviconData: state.faviconData,
 		faviconMime: state.faviconMime,
-		isLoading: state.fetchState === FetchState.FETCH_IN_PROGRESS,
-		isVisible: state.fetchState !== FetchState.NOT_STARTED,
+		isLoading: state.fetchState === FetchState.FETCH_IN_PROGRESS,		
 		isErrored: state.fetchState === FetchState.FETCH_ERROR,
-		title : state.title === null ? state.url : state.title,
+		title : state.title === null && state.fetchState !== FetchState.FETCH_IN_PROGRESS ? state.url : state.title,
 		error: state.fetchError !== null ? mapErrorCodeToDescription(state.fetchError) : null
 	};
 }
