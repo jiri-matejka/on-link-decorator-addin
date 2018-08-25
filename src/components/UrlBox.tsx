@@ -20,6 +20,7 @@ export class UrlBox extends React.Component<UrlBoxProps> {
 		return (
 			<TextField label="Url" key="txtbox" 
 				errorMessage={!this.props.isUrlValid ? "Url not valid" : null} 
+				required
 				onBlur={this.onTextFieldBlur} />
 		)
 	}
