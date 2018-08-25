@@ -13,22 +13,10 @@ export interface AppProps {
     isOfficeInitialized: boolean;
 }
 
-export interface AppState {
-    title: string;
-    faviconData: string;
-    faviconMime: string;
-}
-
-export default class App extends React.Component<AppProps, AppState> {    
+export default class App extends React.Component<AppProps> {    
     constructor(props, context) {
         super(props, context);
-        this.onFaviconObtained = this.onFaviconObtained.bind(this);
         this.render = this.render.bind(this);
-        this.state = {
-            title: null,
-            faviconData: null,
-            faviconMime: null
-        };
     }
 
     componentDidMount() {
@@ -64,29 +52,19 @@ export default class App extends React.Component<AppProps, AppState> {
         //     );
         // }
 
-        const haveFavicon = this.state.title !== "" && this.state.title !== null;
-
         let elements = new Array(3);
 
         elements.push (<Header logo='assets/logo-filled.png' title={this.props.title} message='Welcome' />);
 
         elements.push(<UrlBoxContainer />);
-        // elements.push(<Preview isVisible={haveFavicon} isLoading={false} faviconData={this.state.faviconData} 
-        //     faviconMime={this.state.faviconMime} title={this.state.title} />);
         elements.push(<PreviewContainer/>);
 
-        elements.push(<Button primary text="Insert" disabled={!haveFavicon} />)
+        elements.push(<Button primary text="Insert" />)
 
 
         return React.createElement("div", {className: "ms-welcome"}, elements);
         
     }
 
-    onFaviconObtained(faviconData: string, faviconMime: string, title: string) {
-        this.setState({
-            title: title,
-            faviconData: faviconData,
-            faviconMime: faviconMime
-        });
-    }
+  
 }
