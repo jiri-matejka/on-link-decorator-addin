@@ -38,7 +38,7 @@ export default class Preview extends React.Component<IPreviewProps> {
                     <h2 className="ms-font-xxl">Preview</h2>
                     <div className="preview">
                         {this.props.isLoading && 
-                            <Spinner size={SpinnerSize.medium} key="spinner" />
+                            <Spinner size={SpinnerSize.medium} key="spinner" label="Loading icon and title" />
                         }
                         {!this.props.isLoading && 
                             <React.Fragment>
