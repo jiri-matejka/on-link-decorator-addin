@@ -18,7 +18,7 @@ function mapStateToProps(state : IAppState) : IPreviewStaticProps {
 		isLoading: state.fetchState === FetchState.FETCH_IN_PROGRESS,
 		isVisible: state.fetchState !== FetchState.NOT_STARTED,
 		isErrored: state.fetchState === FetchState.FETCH_ERROR,
-		title : state.title === null ? "" : state.title,
+		title : state.title === null ? state.url : state.title,
 		error: state.fetchError
 	};
 }
