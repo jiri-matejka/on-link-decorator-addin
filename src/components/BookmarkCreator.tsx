@@ -1,15 +1,15 @@
-import * as React from 'react';
-import { IPreviewProps } from './Preview'
+//import * as React from 'react';
 
-export default class Preview extends React.Component<IPreviewProps> {
+
+// export default class Preview extends React.Component<IPreviewProps> {
     
-    constructor(props) {
-        super(props);
-        this.render = this.render.bind(this);
-	}
+//     constructor(props) {
+//         super(props);
+//         this.render = this.render.bind(this);
+// 	}
 
-	// Renderless component
-	render() {
-		return null;
-	}
-}
+// 	// Renderless component
+// 	render() {
+// 		return null;
+// 	}
+// }
