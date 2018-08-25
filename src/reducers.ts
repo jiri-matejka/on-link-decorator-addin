@@ -14,7 +14,7 @@ export function rootReducer(state: IAppState = initialState, action: AppActions)
 			return {...state, fetchState: FetchState.FETCH_ERROR, fetchError: action.error};
 		case Actions.FAVICON_FETCH_COMPLETED:
 			return {...state, fetchState: FetchState.FETCH_OK, fetchError: null, faviconData: action.faviconData, faviconMime: action.faviconMime, 
-				fetchedTitle: action.title};
+				fetchedTitle: action.title, title: action.title};
 		default:
 			return state;
 	}
