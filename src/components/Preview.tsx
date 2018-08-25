@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { MessageBar, TextField, Label, Spinner } from 'office-ui-fabric-react';
+import { TextField, Label, Spinner } from 'office-ui-fabric-react';
 
 import './Preview.css';
 
@@ -34,18 +34,12 @@ export default class Preview extends React.Component<IPreviewProps> {
             `data:${this.props.faviconMime};base64,${this.props.faviconData}`
             : 'assets/icons8-bookmark-page-48.png';
 
-        const placeholder : string = this.props.isLoading ? "Loading the icon" : "Title of your bookmark";
-        const title : string = this.props.isLoading ? "" : this.props.title;
+        const placeholder : string = this.props.isErrored ? `Icon not downloaded: ${this.props.error}` : (this.props.isLoading ? "Loading the icon" : "Title of your bookmark");
+        const title : string = this.props.isErrored ? "" : (this.props.isLoading ? "" : this.props.title);
 
         return  (
                 <div>
-                   <Label>Icon and title</Label>
-                                      
-                    {this.props.isErrored &&
-                        <MessageBar className="message-bar">
-                            Icon not downloaded: { this.props.error }
-                        </MessageBar>                            
-                    }
+                   <Label>Icon and title</Label>      
                     
                     <div className="preview">
                         {this.props.isLoading &&
