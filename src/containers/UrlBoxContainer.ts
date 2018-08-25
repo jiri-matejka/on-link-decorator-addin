@@ -1,5 +1,6 @@
 import { connect } from 'react-redux'
 import { validUrlEntered, invalidUrlEntered } from '../actionTypes'
+import { fetchFavicon } from '../asyncActions'
 import { IAppState, UrlState } from '../stateDefinition'
 import { UrlBox } from '../components/UrlBox'
 
@@ -30,6 +31,7 @@ function mapDispatchToProps(dispatch) {
 			}
 			else {
 				dispatch(validUrlEntered(url));
+				dispatch(fetchFavicon(url));
 			}
 		}
 	}
