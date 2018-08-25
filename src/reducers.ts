@@ -9,7 +9,7 @@ export function rootReducer(state: IAppState = initialState, action: AppActions)
 		case Actions.VALID_URL_ENTERED:
 			return {...state, urlState: UrlState.VALID_URL_ENTERED, url: action.payload.url};
 		case Actions.FAVICON_FETCH_STARTED:
-			return {...state, fetchState: FetchState.FETCH_IN_PROGRESS};
+			return {...state, fetchState: FetchState.FETCH_IN_PROGRESS, faviconData: null, faviconMime: null, title: null, fetchedTitle: null};
 		case Actions.FAVICON_FETCH_FAILED:
 			return {...state, fetchState: FetchState.FETCH_ERROR, fetchError: action.error};
 		case Actions.FAVICON_FETCH_COMPLETED:
