@@ -1,14 +1,12 @@
 import * as React from 'react';
-import { Shimmer, ShimmerElementType as ElemType } from 'office-ui-fabric-react';
-import { MessageBar, TextField, Label } from 'office-ui-fabric-react';
+import { MessageBar, TextField, Label, Spinner } from 'office-ui-fabric-react';
 
 import './Preview.css';
 
 export interface IPreviewStaticProps
 {
-    isLoading: boolean,
-    isVisible: boolean,
-    isErrored: boolean,
+    isLoading: boolean,    
+    isErrored: boolean,    
     hasFavicon: boolean,
     faviconData: string,
     faviconMime: string,
@@ -31,30 +29,34 @@ export default class Preview extends React.Component<IPreviewProps> {
         this.render = this.render.bind(this);
     }
 
-    render() {
-        if(!this.props.isVisible)
-            return null;
+    render() {        
+        const src = this.props.faviconData != null ? 
+            `data:${this.props.faviconMime};base64,${this.props.faviconData}`
+            : 'assets/icons8-bookmark-page-48.png';
+
+        const placeholder : string = this.props.isLoading ? "Loading the icon" : "Title of your bookmark";
+        const title : string = this.props.isLoading ? "" : this.props.title;
 
         return  (
                 <div>
                    <Label>Icon and title</Label>
-                   
-                    {this.props.isLoading && 
-                        <Shimmer
-                            shimmerElements={[{ type: ElemType.circle, height: 30 }, { type: ElemType.gap, width: 5 }, { type: ElemType.line, height: 30 }]}
-                      />
-                    }
+                                      
                     {this.props.isErrored &&
                         <MessageBar className="message-bar">
                             Icon not downloaded: { this.props.error }
                         </MessageBar>                            
                     }
-                    {!this.props.isLoading && 
-                        <div className="preview">
-                            <img className="image" src={ `data:${this.props.faviconMime};base64,${this.props.faviconData}` } />
-                            <TextField className="title-box" value={this.props.title} autoFocus />
-                        </div>
-                    }
+                    
+                    <div className="preview">
+                        {this.props.isLoading &&
+                            <Spinner className="image" />
+                        }
+                        {!this.props.isLoading &&
+                            <img className="image" src={ src } />
+                        }
+                        <TextField className="title-box" value={title} placeholder={placeholder} />
+                    </div>
+                
                     
                 </div>)
     }
