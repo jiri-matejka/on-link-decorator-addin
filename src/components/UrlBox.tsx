@@ -11,6 +11,7 @@ interface IUrlBoxState {
 }
 
 export class UrlBox extends React.Component<UrlBoxProps, IUrlBoxState> {
+	
     constructor(props, context) {
         super(props, context);
       
@@ -28,10 +29,16 @@ export class UrlBox extends React.Component<UrlBoxProps, IUrlBoxState> {
 			<TextField label="Url" key="txtbox" 
 				errorMessage={!this.props.isUrlValid ? "Url not valid" : null} 
 				placeholder="Insert your bookmark link"
-				onBlur={this.onTextFieldBlur} />
+				onBlur={this.onTextFieldBlur}
+				onFocus={this.onTextFieldFocus}
+				/>
 		)
 	}
 		
+	onTextFieldFocus(event: React.FocusEvent<HTMLInputElement>) {
+		event.currentTarget.select();
+	}
+	
 	onTextFieldBlur(newValue: React.FocusEvent<HTMLElement>) {		
 		const url = (newValue.currentTarget as HTMLInputElement).value;
 
