@@ -33,6 +33,7 @@ export default class Preview extends React.Component<IPreviewProps> {
         const src = this.props.faviconData != null ? 
             `data:${this.props.faviconMime};base64,${this.props.faviconData}`
             : 'assets/icons8-bookmark-page-48.png';
+        const imgTitle = this.props.faviconData != null ? "" : "Default icon is used because the website does not provide favicon";
 
         const placeholder : string = this.props.isErrored ? `Icon not downloaded: ${this.props.error}` : (this.props.isLoading ? "Loading the icon" : "Title of your bookmark");
         const title : string = this.props.isErrored ? "" : (this.props.isLoading ? "" : this.props.title);
@@ -46,7 +47,7 @@ export default class Preview extends React.Component<IPreviewProps> {
                             <Spinner className="preview-spinner" />
                         }
                         {!this.props.isLoading &&
-                            <img className="preview-image" src={ src } />
+                            <img className="preview-image" src={ src } title={imgTitle} />
                         }
                         <TextField className="preview-title-box" value={title} placeholder={placeholder} />
                     </div>
