@@ -4,6 +4,7 @@ import { AppContainer } from 'react-hot-loader';
 import { initializeIcons } from 'office-ui-fabric-react/lib/Icons';
 
 import thunkMiddleware from 'redux-thunk'
+import { createLogger } from 'redux-logger'
 import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 
@@ -15,7 +16,8 @@ import 'office-ui-fabric-react/dist/css/fabric.min.css';
 
 initializeIcons();
 
-const store = createStore(rootReducer, applyMiddleware(thunkMiddleware));
+const loggerMiddleware = createLogger()
+const store = createStore(rootReducer, applyMiddleware(thunkMiddleware, loggerMiddleware));
 
 let isOfficeInitialized = false;
 
