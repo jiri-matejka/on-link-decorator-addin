@@ -43,12 +43,12 @@ export default class Preview extends React.Component<IPreviewProps> {
                     
                     <div className="preview">
                         {this.props.isLoading &&
-                            <Spinner className="image" />
+                            <Spinner className="preview-spinner" />
                         }
                         {!this.props.isLoading &&
-                            <img className="image" src={ src } />
+                            <img className="preview-image" src={ src } />
                         }
-                        <TextField className="title-box" value={title} placeholder={placeholder} />
+                        <TextField className="preview-title-box" value={title} placeholder={placeholder} />
                     </div>
                 
                     

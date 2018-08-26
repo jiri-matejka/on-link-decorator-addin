@@ -6,8 +6,9 @@
     align-items: center;
 }
 
-.preview > .image
+.preview-image
 {
+    align-self: center;
     flex-basis: 28px;
     flex-shrink: 0;
     flex-grow: 0;
@@ -16,7 +17,15 @@
     margin-right: 5px;
 }
 
-.preview > .title-box
+.preview-spinner
+{
+    flex-shrink: 0;
+    flex-grow: 0;
+    margin-right: 5px;
+    flex-basis: 28px;
+}
+
+.preview-title-box
 {
     flex-shrink: 0;
     flex-grow: 1;
