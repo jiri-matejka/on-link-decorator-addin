@@ -27,21 +27,22 @@ export function fetchFavicon(url: string) {
 		postWithData("https://onenoteutilities/AddinServices/api/pageinfo", { address: url })
 				.then(function(response) {
 				if(response === undefined) {
-					dispatch(faviconFetchFailed("No favicon found"));
+					dispatch(faviconFetchFailed("No favicon found", url));
 					return;
 				}
 				const error = response.Error;
 				const faviconData = response.FaviconData;
 				const faviconMime = response.FaviconMime;
 				const title = response.Title;
+				const resultUrl = response.ResultUrl;
 
 				if(error !== "") {
-					dispatch(faviconFetchFailed(error));
+					dispatch(faviconFetchFailed(error, url));
 					console.log(error);
 					return;
 				}
 				
-				dispatch(faviconFetchCompleted(faviconData, faviconMime, title));
+				dispatch(faviconFetchCompleted(url, faviconData, faviconMime, title, resultUrl));
 
 				// if(faviconData !== undefined) {
 				// 	this.props.onFaviconObtained(faviconData, faviconMime, title);
@@ -50,7 +51,7 @@ export function fetchFavicon(url: string) {
 			}
 			).catch(function(err) {
 				console.log("Error when obtaining favicon: ", err);
-				dispatch(faviconFetchFailed(err));
+				dispatch(faviconFetchFailed(err, url));
 			});
 
 	}

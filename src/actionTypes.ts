@@ -39,24 +39,29 @@ export function faviconFetchStarted(url: string) { return {type: Actions.FAVICON
 
 export interface IFaviconFetchFailed {
 	type: Actions.FAVICON_FETCH_FAILED,
+	url: string,
 	error: string
 }
 
-export function faviconFetchFailed(error: string) { return {type: Actions.FAVICON_FETCH_FAILED, error: error}}
+export function faviconFetchFailed(url: string, error: string) { return {type: Actions.FAVICON_FETCH_FAILED, error: error, url: url}}
 
 export interface IFaviconFetchCompleted {
 	type: Actions.FAVICON_FETCH_COMPLETED,
+	url: string,
 	faviconData: string,
 	faviconMime: string,
-	title: string
+	title: string,
+	resultUrl: string
 }
 
-export function faviconFetchCompleted(faviconData: string, faviconMime: string, title: string) {
+export function faviconFetchCompleted(url: string, faviconData: string, faviconMime: string, title: string, resultUrl: string) {
 	return {
 		type: Actions.FAVICON_FETCH_COMPLETED,
 		faviconData: faviconData,
 		faviconMime: faviconMime,
-		title: title
+		title: title,
+		url: url,
+		resultUrl: resultUrl
 	};
 }
 
