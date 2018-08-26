@@ -1,9 +1,14 @@
+.preview-container
+{
+    margin-top: 10px;
+}
+
 .preview
 {
     display: flex;
     flex-direction: row;
     align-content: stretch;
-    align-items: center;
+    align-items: center;    
 }
 
 .preview-image
