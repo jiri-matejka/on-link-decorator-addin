@@ -4,29 +4,32 @@ import { fetchFavicon } from '../asyncActions'
 import { IAppState, UrlState } from '../stateDefinition'
 import { UrlBox } from '../components/UrlBox'
 
-function getHostName(href: string) {
-	var match = href.match(/^(https?\:)\/\/(([^:\/?#]*)(?:\:([0-9]+))?)([\/]{0,1}[^?#]*)(\?[^#]*|)(#.*|)$/);
-	if(!match)
-		return null;
-	else return match[2];
+function isValidUrl(href: string): boolean {
 	
-	// return match && {
-	//     href: href,
-	//     protocol: match[1],
-	//     host: match[2],
-	//     hostname: match[3],
-	//     port: match[4],
-	//     pathname: match[5],
-	//     search: match[6],
-	//     hash: match[7]
-	// }
+	if(href.indexOf(".") == -1) {
+		return false;
+	}
+
+	if(!href.startsWith("http://") && !href.startsWith("https://")) {
+		href = "https://" + href;
+	}
+
+	var pattern = new RegExp('^(https?:\\/\\/)?'+ // protocol
+		'((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.?)+[a-z]{2,}|'+ // domain name
+		'((\\d{1,3}\\.){3}\\d{1,3}))'+ // OR ip (v4) address
+		'(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*'+ // port and path
+		'(\\?[;&a-z\\d%_.~+=-]*)?'+ // query string
+		'(\\#[-a-z\\d_]*)?$','i'); // fragment locator
+	
+	return pattern.test(href);
+
 }
 
 function mapDispatchToProps(dispatch) {
 	return {
 		onUrlEntered: url => {
-			const hostname: string = getHostName(url);
-			if (hostname === null) {
+			const isValid: boolean = isValidUrl(url);
+			if (!isValid) {
 				dispatch(invalidUrlEntered());
 			}
 			else {
