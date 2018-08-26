@@ -35,7 +35,7 @@ export default class Preview extends React.Component<IPreviewProps> {
             : 'assets/icons8-bookmark-page-48.png';
         const imgTitle = this.props.faviconData != null ? "" : "Default icon is used because the website does not provide favicon";
 
-        const placeholder : string = this.props.isErrored ? `Icon not downloaded: ${this.props.error}` : (this.props.isLoading ? "Loading the icon" : "Title of your bookmark");
+        const placeholder : string = this.props.isErrored ? `Icon not downloaded: ${this.props.error}` : (this.props.isLoading ? "Loading the icon..." : "Title of your bookmark");
         const title : string = this.props.isErrored ? "" : (this.props.isLoading ? "" : this.props.title);
 
         return  (
