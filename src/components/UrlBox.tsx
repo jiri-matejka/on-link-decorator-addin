@@ -16,6 +16,7 @@ export class UrlBox extends React.Component<UrlBoxProps, IUrlBoxState> {
         super(props, context);
       
 		this.onTextFieldBlur = this.onTextFieldBlur.bind(this);
+		this.onTextFieldPaste = this.onTextFieldPaste.bind(this);
 		this.render = this.render.bind(this);
 
 		this.state = {
@@ -31,10 +32,23 @@ export class UrlBox extends React.Component<UrlBoxProps, IUrlBoxState> {
 				placeholder="Insert your bookmark link"
 				onBlur={this.onTextFieldBlur}
 				onFocus={this.onTextFieldFocus}
+				onPaste={this.onTextFieldPaste}
 				/>
 		)
 	}
 		
+	onTextFieldPaste(event) {
+		const eventTarget:HTMLInputElement = (event.target as HTMLInputElement);
+		window.setTimeout(() => {
+			const url = eventTarget.value;
+			
+			if(this.state.lastUrl !== url)	{
+				this.setState({lastUrl: url});
+				this.props.onUrlEntered(url);	
+			}
+		});
+	}
+
 	onTextFieldFocus(event: React.FocusEvent<HTMLInputElement>) {
 		event.currentTarget.select();
 	}
