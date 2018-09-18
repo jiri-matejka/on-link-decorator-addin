@@ -26,15 +26,20 @@ export default class App extends React.Component<AppProps> {
     click = async () => {
         try {
             await OneNote.run(async context => {
-                /**
-                 * Insert your OneNote code here
-                 */
+                
+                const paragraph = context.application.getActiveParagraphOrNull();
+                
+
                 return context.sync();
             });
         } catch(error) {
             OfficeHelpers.UI.notify(error);
             OfficeHelpers.Utilities.log(error);
         };
+    }
+
+    onInsertClick() {
+
     }
 
     render() {
@@ -62,7 +67,8 @@ export default class App extends React.Component<AppProps> {
 
         
 
-        elements.push(<Button primary text="Insert" className="app-primary-button" />)
+        elements.push(<Button primary text="Insert" className="app-primary-button" 
+            onClick={this.onInsertClick} />)
 
 
         return React.createElement("div", {className: "ms-welcome"}, elements);
