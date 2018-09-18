@@ -23,7 +23,7 @@
         "redux-thunk": "^2.3.0"
     },
     "devDependencies": {
-        "@types/office-js": "^0.0.51",
+        "@types/office-js": "^0.0.111",
         "@types/react": "^16.0.38",
         "@types/react-dom": "^16.0.4",
         "@types/react-hot-loader": "^3.0.6",
