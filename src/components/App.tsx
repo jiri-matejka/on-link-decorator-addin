@@ -18,17 +18,46 @@ export default class App extends React.Component<AppProps> {
     constructor(props, context) {
         super(props, context);
         this.render = this.render.bind(this);
+        this.onInsertClick = this.onInsertClick.bind(this);
     }
 
     componentDidMount() {
     }
 
+    wait = ms => new Promise((r)=>setTimeout(r, ms));
+
     click = async () => {
+
+
         try {
+            // await this.wait(2000);
+            // console.log("after wait");
             await OneNote.run(async context => {
                 
-                const paragraph = context.application.getActiveParagraphOrNull();
-                
+               var page = context.application.getActivePage();
+              
+               page.load("contents");
+
+                await context.sync();
+
+                const outline = page.contents.items[0].outline;
+
+                outline.load("paragraphs");
+
+                await context.sync();
+               
+
+                outline.paragraphs.items[0].load("richText");
+
+                await context.sync();
+
+                var rich = outline.paragraphs.items[0].richText;
+
+                var html = rich.getHtml();
+
+                await context.sync();
+
+                console.log(html.value);
 
                 return context.sync();
             });
@@ -39,7 +68,7 @@ export default class App extends React.Component<AppProps> {
     }
 
     onInsertClick() {
-
+        this.click();
     }
 
     render() {
