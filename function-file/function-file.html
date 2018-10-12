@@ -11,12 +11,50 @@
     <!-- Office JavaScript API -->
     <script type="text/javascript" src="https://appsforoffice.microsoft.com/lib/1.1/hosted/office.debug.js"></script>
 
-    <script type="text/javascript" src="function-file.js"></script>
+    <!-- <script type="text/javascript" src="function-file.js"></script> -->
 </head>
 
 <body>
+    The body of function-file is empty
   <!-- NOTE: The body is empty on purpose. Since function in function-file.js are
        invoked via a button, there is no UI to render. -->
+
+<script type="text/javascript">
+
+ function writeText(event) {
+    console.log("function-file/writeText");
+    OneNote.run(async context => {
+            //var body = Office.context.document.body;
+            //body.insertText('Test', 'Start');
+            console.log("function-file/writeText/office.run");
+
+
+            
+            return context.sync();
+        })
+        .catch(function (error) {
+            console.log('Error: ' + JSON.stringify(error));
+            if (error instanceof OfficeExtension.Error) {
+                console.log('Debug info: ' + JSON.stringify(error.debugInfo));
+            }
+        });
+    event.completed();
+}
+
+
+  // The initialize function must be run each time a new page is loaded
+  Office.initialize = () => {
+
+  };
+  
+ 
+  // Add any ui-less function here
+
+
+
+</script>
+
+
 </body>
 
 </html>
