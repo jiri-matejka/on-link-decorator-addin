@@ -22,14 +22,42 @@
 <script type="text/javascript">
 
  function writeText(event) {
-    console.log("function-file/writeText");
+    
     OneNote.run(async context => {
             //var body = Office.context.document.body;
             //body.insertText('Test', 'Start');
-            console.log("function-file/writeText/office.run");
+            console.log("inside run");
+            var para = context.application.getActiveParagraphOrNull();
+            var outline = context.application.getActiveOutlineOrNull();
 
+            await context.sync();
 
+            if(para.isNullObject) {
+                console.log("paragraph null");
+            }
+            else {
+                console.log("paragraph NOT null");
+            }
+
+            if(outline.isNullObject) {
+                console.log("outline null");
+            }
+            else  {
+                console.log("outline NOT null");
+                outline.load("paragraphs");
+                await context.sync();
+                
+                var rich = outline.paragraphs.items[0].richText;
+
+                var html = rich.getHtml();
+
+                await context.sync();
+
+                console.log(html.value);
+            }
             
+            context.application.insertHtmlAtCurrentPosition("<p>para from addin</p>");
+
             return context.sync();
         })
         .catch(function (error) {
@@ -37,6 +65,10 @@
             if (error instanceof OfficeExtension.Error) {
                 console.log('Debug info: ' + JSON.stringify(error.debugInfo));
             }
+          
+            OfficeHelpers.UI.notify(error);
+            OfficeHelpers.Utilities.log(error);
+        
         });
     event.completed();
 }

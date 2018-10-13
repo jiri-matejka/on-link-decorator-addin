@@ -50,7 +50,7 @@ export default class App extends React.Component<AppProps> {
                 outline.paragraphs.items[0].load("richText");
 
                 await context.sync();
-
+                
                 var rich = outline.paragraphs.items[0].richText;
 
                 var html = rich.getHtml();
