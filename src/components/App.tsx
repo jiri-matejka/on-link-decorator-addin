@@ -46,20 +46,26 @@ export default class App extends React.Component<AppProps> {
 
                 await context.sync();
                
+                for(var i=0; i < outline.paragraphs.count; i++) {
+                    var para = outline.paragraphs.items[i];
 
-                outline.paragraphs.items[0].load("richText");
+                    para.load("richText");
+    
+                    await context.sync();
+    
+                    var rich = para.richText;
+    
+                    var html = rich.getHtml();
+    
+                    await context.sync();
+    
+                    console.log(html.value);
+                }               
 
-                await context.sync();
+                outline.paragraphs.items[0].insertHtmlAsSibling(OneNote.InsertLocation.after,
+                     "<p data-id=\"test\">Data id para</p>");
 
-                var rich = outline.paragraphs.items[0].richText;
-
-                var html = rich.getHtml();
-
-                await context.sync();
-
-                console.log(html.value);
-
-                return context.sync();
+              return context.sync();
             });
         } catch(error) {
             OfficeHelpers.UI.notify(error);
