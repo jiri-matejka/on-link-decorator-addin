@@ -11,12 +11,82 @@
     <!-- Office JavaScript API -->
     <script type="text/javascript" src="https://appsforoffice.microsoft.com/lib/1.1/hosted/office.debug.js"></script>
 
-    <script type="text/javascript" src="function-file.js"></script>
+    <!-- <script type="text/javascript" src="function-file.js"></script> -->
 </head>
 
 <body>
+    The body of function-file is empty
   <!-- NOTE: The body is empty on purpose. Since function in function-file.js are
        invoked via a button, there is no UI to render. -->
+
+<script type="text/javascript">
+
+ function writeText(event) {
+    
+    OneNote.run(async context => {
+            //var body = Office.context.document.body;
+            //body.insertText('Test', 'Start');
+            console.log("inside run");
+            var para = context.application.getActiveParagraphOrNull();
+            var outline = context.application.getActiveOutlineOrNull();
+
+            await context.sync();
+
+            if(para.isNullObject) {
+                console.log("paragraph null");
+            }
+            else {
+                console.log("paragraph NOT null");
+            }
+
+            if(outline.isNullObject) {
+                console.log("outline null");
+            }
+            else  {
+                console.log("outline NOT null");
+                outline.load("paragraphs");
+                await context.sync();
+                
+                var rich = outline.paragraphs.items[0].richText;
+
+                var html = rich.getHtml();
+
+                await context.sync();
+
+                console.log(html.value);
+            }
+            
+            context.application.insertHtmlAtCurrentPosition("<p>para from addin</p>");
+
+            return context.sync();
+        })
+        .catch(function (error) {
+            console.log('Error: ' + JSON.stringify(error));
+            if (error instanceof OfficeExtension.Error) {
+                console.log('Debug info: ' + JSON.stringify(error.debugInfo));
+            }
+          
+            OfficeHelpers.UI.notify(error);
+            OfficeHelpers.Utilities.log(error);
+        
+        });
+    event.completed();
+}
+
+
+  // The initialize function must be run each time a new page is loaded
+  Office.initialize = () => {
+
+  };
+  
+ 
+  // Add any ui-less function here
+
+
+
+</script>
+
+
 </body>
 
 </html>
