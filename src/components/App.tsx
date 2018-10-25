@@ -9,6 +9,8 @@ import { PreviewContainer } from '../containers/PreviewContainer';
 
 import './AppStyles.css'
 
+import { dumpParagraphs } from '../onenote-trial'
+
 export interface AppProps {
     title: string
     isOfficeInitialized: boolean;
@@ -27,43 +29,46 @@ export default class App extends React.Component<AppProps> {
     wait = ms => new Promise((r)=>setTimeout(r, ms));
 
     click = async () => {
+        
+        dumpParagraphs();
 
+        //dumpPage();
 
         try {
             // await this.wait(2000);
             // console.log("after wait");
             await OneNote.run(async context => {
                 
-               var page = context.application.getActivePage();
-              
-               page.load("contents");
+            //    var page = context.application.getActivePage();
+                
+            //    page.load("contents");
 
-                await context.sync();
+            //     await context.sync();                
 
-                const outline = page.contents.items[0].outline;
+            //     const outline = page.contents.items[0].outline;
 
-                outline.load("paragraphs");
+            //     outline.load("paragraphs");
 
-                await context.sync();
+            //     await context.sync();
                
-                for(var i=0; i < outline.paragraphs.count; i++) {
-                    var para = outline.paragraphs.items[i];
+            //     for(var i=0; i < outline.paragraphs.count; i++) {
+            //         var para = outline.paragraphs.items[i];
 
-                    para.load("richText");
+            //         para.load("richText");
     
-                    await context.sync();
+            //         await context.sync();
     
-                    var rich = para.richText;
+            //         var rich = para.richText;
     
-                    var html = rich.getHtml();
+            //         var html = rich.getHtml();
     
-                    await context.sync();
+            //         await context.sync();
     
-                    console.log(html.value);
-                }               
+            //         console.log(html.value);
+            //     }               
 
-                outline.paragraphs.items[0].insertHtmlAsSibling(OneNote.InsertLocation.after,
-                     "<p data-id=\"test\">Data id para</p>");
+                // outline.paragraphs.items[0].insertHtmlAsSibling(OneNote.InsertLocation.after,
+                //       "<p style=\"\" language=\"mi-mi\">Data id para2</p>");
 
               return context.sync();
             });
