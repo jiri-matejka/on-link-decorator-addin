@@ -30,7 +30,7 @@ export default class App extends React.Component<AppProps> {
 
     click = async () => {
         
-        dumpParagraphs();
+        //dumpParagraphs();
 
         //dumpPage();
 
@@ -39,36 +39,62 @@ export default class App extends React.Component<AppProps> {
             // console.log("after wait");
             await OneNote.run(async context => {
                 
-            //    var page = context.application.getActivePage();
+               var page = context.application.getActivePage();
                 
-            //    page.load("contents");
+                page.load("contents");                
 
-            //     await context.sync();                
+                const restApiId = page.getRestApiId();
 
-            //     const outline = page.contents.items[0].outline;
+                await context.sync();                
 
-            //     outline.load("paragraphs");
+                console.log("outlines: " + page.contents.items.length) ;
+                console.log("page rest api id: " + restApiId.value) ;
 
-            //     await context.sync();
+                page.contents.load("outline");
+
+                await context.sync();    
+
+                const outline = page.contents.items[0].outline;
+                                
+                //console.log("outline id is " + outline.id);
+                //outline.load("paragraphs");
+
+                outline.appendHtml("<table border=\"1\"><tr><td>first cell</td><td>second cell</td></table>");
+
+                console.log("before appendHtml");
+                await context.sync();
+                console.log("after appendHtml");
                
-            //     for(var i=0; i < outline.paragraphs.count; i++) {
-            //         var para = outline.paragraphs.items[i];
+                //const para = outline.paragraphs;
+                
+                
+                //para.load("items");
+                
 
-            //         para.load("richText");
-    
-            //         await context.sync();
-    
-            //         var rich = para.richText;
-    
-            //         var html = rich.getHtml();
-    
-            //         await context.sync();
-    
-            //         console.log(html.value);
-            //     }               
+                console.log("before reading items");
+                await context.sync();
+                console.log("after reading items");
 
-                // outline.paragraphs.items[0].insertHtmlAsSibling(OneNote.InsertLocation.after,
-                //       "<p style=\"\" language=\"mi-mi\">Data id para2</p>");
+                
+                // for(var i=0; i < outline.paragraphs.count; i++) {
+                //     var para = outline.paragraphs.items[i];
+
+                //     para.load("richText");
+    
+                //     await context.sync();
+    
+                //     var rich = para.richText;
+    
+                //     var html = rich.getHtml();
+    
+                //     await context.sync();
+    
+                //     console.log(html.value);
+                // }               
+
+                // para.items[0].insertHtmlAsSibling(OneNote.InsertLocation.after,
+                //       "<p style=\"\" language=\"mi-mi\">Language mi-mi</p>");
+
 
               return context.sync();
             });
