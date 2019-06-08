@@ -43,7 +43,7 @@ export default class App extends React.Component<AppProps> {
                 <Header/>
                 <UrlBoxContainer/>
                 <PreviewContainer/>                
-                <Button primary text="Insert" className="app-primary-button" onClick={this.onInsertClick} />
+                <Button primary text="Insert" className="app-primary-button main-surface-flex-item" onClick={this.onInsertClick} />
             </div>
         );
     }
