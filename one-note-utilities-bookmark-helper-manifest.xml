@@ -13,7 +13,7 @@
 
   <!--Version. Updates from the store only get triggered if there is a version change. -->
   <Version>1.0.0.0</Version>
-  <ProviderName>[Provider name]</ProviderName>
+  <ProviderName>Jiri Matejka</ProviderName>
   <DefaultLocale>en-US</DefaultLocale>
   <!-- The display name of your add-in. Used on the store and various places of the Office UI such as the add-ins dialog. -->
   <DisplayName DefaultValue="OneNote Utilities Bookmark Helper" />
@@ -69,7 +69,7 @@
           </GetStarted>
           <!-- Function file is a HTML page that includes the JavaScript where functions for ExecuteAction will be called.
             Think of the FunctionFile as the code behind ExecuteFunction. -->
-          <FunctionFile resid="Contoso.DesktopFunctionFile.Url" />
+          
 
           <!-- PrimaryCommandSurface is the main Office Ribbon. -->
           <ExtensionPoint xsi:type="PrimaryCommandSurface">
@@ -82,9 +82,9 @@
                 <!-- Icons. Required sizes 16,32,80, optional 20, 24, 40, 48, 64. Strongly recommended to provide all sizes for great UX. -->
                 <!-- Use PNG icons. All URLs on the resources section must use HTTPS. -->
                 <Icon>
-                  <bt:Image size="16" resid="Contoso.tpicon_16x16" />
-                  <bt:Image size="32" resid="Contoso.tpicon_32x32" />
-                  <bt:Image size="80" resid="Contoso.tpicon_80x80" />
+                  <bt:Image size="16" resid="Asset.logo_16x16" />
+                  <bt:Image size="32" resid="Asset.logo_32x32" />
+                  <bt:Image size="80" resid="Asset.logo_48x48" />
                 </Icon>
 
                 <!-- Control. It can be of type "Button" or "Menu". -->
@@ -97,9 +97,9 @@
                     <Description resid="Contoso.TaskpaneButton.Tooltip" />
                   </Supertip>
                   <Icon>
-                    <bt:Image size="16" resid="Contoso.tpicon_16x16" />
-                    <bt:Image size="32" resid="Contoso.tpicon_32x32" />
-                    <bt:Image size="80" resid="Contoso.tpicon_80x80" />
+                    <bt:Image size="16" resid="Asset.logo_16x16" />
+                    <bt:Image size="32" resid="Asset.logo_32x32" />
+                    <bt:Image size="80" resid="Asset.logo_48x48" />
                   </Icon>
 
                   <!-- This is what happens when the command is triggered (E.g. click on the Ribbon). Supported actions are ExecuteFunction or ShowTaskpane. -->
@@ -119,24 +119,23 @@
     <!-- You can use resources across hosts and form factors. -->
     <Resources>
       <bt:Images>
-        <bt:Image id="Contoso.tpicon_16x16" DefaultValue="https://localhost:3000/assets/icon-16.png" />
-        <bt:Image id="Contoso.tpicon_32x32" DefaultValue="https://localhost:3000/assets/icon-32.png" />
-        <bt:Image id="Contoso.tpicon_80x80" DefaultValue="https://localhost:3000/assets/icon-80.png" />
+        <bt:Image id="Asset.logo_16x16" DefaultValue="https://localhost:3000/assets/icon-16.png" />
+        <bt:Image id="Asset.logo_32x32" DefaultValue="https://localhost:3000/assets/icon-32.png" />
+        <bt:Image id="Asset.logo_48x48" DefaultValue="https://localhost:3000/assets/icons8-bookmark-page-48.png" />
       </bt:Images>
       <bt:Urls>
         <bt:Url id="Contoso.Taskpane.Url" DefaultValue="https://localhost:3000/index.html" />
-        <bt:Url id="Contoso.GetStarted.LearnMoreUrl" DefaultValue="https://go.microsoft.com/fwlink/?LinkId=276812" />
-        <bt:Url id="Contoso.DesktopFunctionFile.Url" DefaultValue="https://localhost:3000/function-file/function-file.html" />
+        <bt:Url id="Contoso.GetStarted.LearnMoreUrl" DefaultValue="https://go.microsoft.com/fwlink/?LinkId=276812" />        
       </bt:Urls>
       <!-- ShortStrings max characters==125. -->
       <bt:ShortStrings>
-        <bt:String id="Contoso.TaskpaneButton.Label" DefaultValue="Show Taskpane" />
+        <bt:String id="Contoso.TaskpaneButton.Label" DefaultValue="Decorate link" />
         <bt:String id="Contoso.Group1Label" DefaultValue="Commands Group" />
         <bt:String id="Contoso.GetStarted.Title" DefaultValue="Get started with your sample add-in!" />
       </bt:ShortStrings>
       <!-- LongStrings max characters==250. -->
       <bt:LongStrings>
-        <bt:String id="Contoso.TaskpaneButton.Tooltip" DefaultValue="Click to Show a Taskpane" />
+        <bt:String id="Contoso.TaskpaneButton.Tooltip" DefaultValue="Decorate hyperlink with an icon" />        
         <bt:String id="Contoso.GetStarted.Description" DefaultValue="Your sample add-in loaded succesfully. Go to the HOME tab and click the 'Show Taskpane' button to get started." />
       </bt:LongStrings>
     </Resources>
