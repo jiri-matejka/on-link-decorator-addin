@@ -8,6 +8,7 @@ import { UrlBoxContainer } from '../containers/UrlBoxContainer';
 import { PreviewContainer } from '../containers/PreviewContainer';
 
 import './AppStyles.css'
+import { UrlBox } from './UrlBox';
 
 export interface AppProps {   
     isOfficeInitialized: boolean;
@@ -56,21 +57,28 @@ export default class App extends React.Component<AppProps> {
         //         />
         //     );
         // }
+        return (
+            <div className="ms-welcome" >                
+                <Header/>
+                <UrlBoxContainer/>
+                <PreviewContainer/>                
+                <Button primary text="Insert" className="app-primary-button" onClick={this.onInsertClick} />
+            </div>
+        );
+        // let elements = new Array(3);
 
-        let elements = new Array(3);
+        // elements.push (<Header />);
 
-        elements.push (<Header />);
-
-        elements.push(<UrlBoxContainer />);
-        elements.push(<PreviewContainer/>);
+        // elements.push(<UrlBoxContainer />);
+        // elements.push(<PreviewContainer/>);
 
         
 
-        elements.push(<Button primary text="Insert" className="app-primary-button" 
-            onClick={this.onInsertClick} />)
+        // elements.push(<Button primary text="Insert" className="app-primary-button" 
+        //     onClick={this.onInsertClick} />)
 
 
-        return React.createElement("div", {className: "ms-welcome"}, elements);
+        // return React.createElement("div", {className: "ms-welcome", id: "root-container"}, elements);
         
     }
 
