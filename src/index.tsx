@@ -21,13 +21,11 @@ const store = createStore(rootReducer, applyMiddleware(thunkMiddleware, loggerMi
 
 let isOfficeInitialized = false;
 
-const title = 'OneNote Utilities Bookmark Helper';
-
 const render = (Component) => {
     ReactDOM.render(
         <Provider store={store}>
         <AppContainer>
-            <Component title={title} isOfficeInitialized={isOfficeInitialized} />
+            <Component isOfficeInitialized={isOfficeInitialized} />
         </AppContainer>
         </Provider>,
         document.getElementById('container')

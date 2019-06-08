@@ -9,8 +9,7 @@ import { PreviewContainer } from '../containers/PreviewContainer';
 
 import './AppStyles.css'
 
-export interface AppProps {
-    title: string
+export interface AppProps {   
     isOfficeInitialized: boolean;
 }
 
@@ -60,7 +59,7 @@ export default class App extends React.Component<AppProps> {
 
         let elements = new Array(3);
 
-        elements.push (<Header logo='assets/logo-filled.png' title={this.props.title} message='Welcome' />);
+        elements.push (<Header />);
 
         elements.push(<UrlBoxContainer />);
         elements.push(<PreviewContainer/>);

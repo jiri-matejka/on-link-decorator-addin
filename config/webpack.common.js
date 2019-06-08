@@ -105,13 +105,13 @@ module.exports = {
         ...WEBPACK_PLUGINS,
         new ExtractTextPlugin('[name].[hash].css'),
         new HtmlWebpackPlugin({
-            title: 'OneNote Utilities Bookmark Helper',
+            title: 'OneNote Utilities Link Decorator',
             filename: 'index.html',
             template: './index.html',
             chunks: ['app', 'vendor', 'polyfills']
         }),
         new HtmlWebpackPlugin({
-            title: 'OneNote Utilities Bookmark Helper',
+            title: 'OneNote Utilities Link Decorator',
             filename: 'function-file/function-file.html',
             template: '../function-file/function-file.html',
             chunks: ['function-file']

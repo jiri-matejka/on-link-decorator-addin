@@ -16,7 +16,7 @@
   <ProviderName>Jiri Matejka</ProviderName>
   <DefaultLocale>en-US</DefaultLocale>
   <!-- The display name of your add-in. Used on the store and various places of the Office UI such as the add-ins dialog. -->
-  <DisplayName DefaultValue="OneNote Utilities Bookmark Helper" />
+  <DisplayName DefaultValue="Link Decorator" />
   <Description DefaultValue="[Notebook Add-in description]"/>
 
   <!-- Icon for your add-in. Used on installation screens and the add-ins dialog. -->
