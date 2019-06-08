@@ -8,7 +8,6 @@ import { UrlBoxContainer } from '../containers/UrlBoxContainer';
 import { PreviewContainer } from '../containers/PreviewContainer';
 
 import './AppStyles.css'
-import { UrlBox } from './UrlBox';
 
 export interface AppProps {   
     isOfficeInitialized: boolean;
@@ -25,11 +24,7 @@ export default class App extends React.Component<AppProps> {
 
     click = async () => {
         try {
-            await OneNote.run(async context => {
-                
-                const paragraph = context.application.getActiveParagraphOrNull();
-                
-
+            await OneNote.run(async context => {      
                 return context.sync();
             });
         } catch(error) {
@@ -43,20 +38,6 @@ export default class App extends React.Component<AppProps> {
     }
 
     render() {
-        // const {
-        //     title,
-        //     isOfficeInitialized,
-        // } = this.props;
-
-        // if (!isOfficeInitialized) {
-        //     return (
-        //         <Progress
-        //             title={title}
-        //             logo='assets/logo-filled.png'
-        //             message='Please sideload your addin to see app body.'
-        //         />
-        //     );
-        // }
         return (
             <div className="ms-welcome" >                
                 <Header/>
@@ -65,21 +46,6 @@ export default class App extends React.Component<AppProps> {
                 <Button primary text="Insert" className="app-primary-button" onClick={this.onInsertClick} />
             </div>
         );
-        // let elements = new Array(3);
-
-        // elements.push (<Header />);
-
-        // elements.push(<UrlBoxContainer />);
-        // elements.push(<PreviewContainer/>);
-
-        
-
-        // elements.push(<Button primary text="Insert" className="app-primary-button" 
-        //     onClick={this.onInsertClick} />)
-
-
-        // return React.createElement("div", {className: "ms-welcome", id: "root-container"}, elements);
-        
     }
 
   
