@@ -27,13 +27,15 @@ export class UrlBox extends React.Component<UrlBoxProps, IUrlBoxState> {
 	render() {
 		
 		return (
-			<TextField label="Url" key="txtbox" 
-				errorMessage={!this.props.isUrlValid ? "Url not valid" : null} 
-				placeholder="Insert your bookmark link"
-				onBlur={this.onTextFieldBlur}
-				onFocus={this.onTextFieldFocus}
-				onPaste={this.onTextFieldPaste}
-				/>
+			<div className="main-surface-flex-item">
+				<TextField label="Url" key="txtbox" 
+					errorMessage={!this.props.isUrlValid ? "Url not valid" : null} 
+					placeholder="Insert your bookmark link"
+					onBlur={this.onTextFieldBlur}
+					onFocus={this.onTextFieldFocus}
+					onPaste={this.onTextFieldPaste}
+					/>
+			</div>
 		)
 	}
 		

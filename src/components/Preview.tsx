@@ -39,7 +39,7 @@ export default class Preview extends React.Component<IPreviewProps> {
         const title : string = this.props.isErrored ? "" : (this.props.isLoading ? "" : this.props.title);
 
         return  (
-                <div className="preview-container">
+                <div className="main-surface-flex-item">
                    <Label>Icon and title</Label>      
                     
                     <div className="preview">

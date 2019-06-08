@@ -1,3 +1,11 @@
+p, label {
+    font-family: "Segoe UI Light", "Segoe UI", Arial, Verdana, sans-serif;
+}
+
+.main-surface-flex-item {
+	padding: 5px 5px 0px 5px;
+}
+
 .app-primary-button {
 	margin-top: 30px;
 }
