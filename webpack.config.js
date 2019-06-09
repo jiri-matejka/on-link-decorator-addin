@@ -3,8 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
     devtool: 'source-map',
     entry: {
-        app: './src/index.ts',
-        'function-file': './function-file/function-file.ts'
+        app: './src/index.ts'        
     },
     resolve: {
         extensions: ['.ts', '.tsx', '.html', '.js']
@@ -31,11 +30,6 @@ module.exports = {
         new HtmlWebpackPlugin({
             template: './index.html',
             chunks: ['app']
-        }),
-        new HtmlWebpackPlugin({
-            template: './function-file/function-file.html',
-            filename: 'function-file/function-file.html',
-            chunks: ['function-file']
-        })
+        })        
     ]
 };

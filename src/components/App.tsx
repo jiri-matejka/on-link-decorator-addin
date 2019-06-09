@@ -9,7 +9,6 @@ import { PreviewContainer } from '../containers/PreviewContainer';
 import { InsertBoxContainer } from '../containers/InsertBoxContainer';
 
 import './AppStyles.css'
-import InsertBox from './InsertBox';
 
 export interface AppProps {   
     isOfficeInitialized: boolean;

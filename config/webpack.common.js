@@ -26,8 +26,7 @@ const entry = {
     app: [
         'react-hot-loader/patch',
         './index.tsx',
-    ],
-    'function-file': '../function-file/function-file.ts'
+    ],    
 };
 
 const rules = [
@@ -109,12 +108,6 @@ module.exports = {
             filename: 'index.html',
             template: './index.html',
             chunks: ['app', 'vendor', 'polyfills']
-        }),
-        new HtmlWebpackPlugin({
-            title: 'OneNote Utilities Link Decorator',
-            filename: 'function-file/function-file.html',
-            template: '../function-file/function-file.html',
-            chunks: ['function-file']
         }),
         new CopyWebpackPlugin([
             {
