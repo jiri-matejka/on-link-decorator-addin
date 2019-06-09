@@ -13,7 +13,9 @@ function mapStateToProps(state: IAppState) : IInsertBoxProps {
 		props = {
 			title: state.fetchedTitle,
 			link: state.url,
-			faviconUrl: state.faviconUrl			
+			faviconUrl: state.faviconUrl,
+			faviconImageData: state.faviconData,
+			faviconMime: state.faviconMime
 		};
 		
 	}
@@ -21,7 +23,9 @@ function mapStateToProps(state: IAppState) : IInsertBoxProps {
 		props = {
 			title: "",
 			link: "",
-			faviconUrl: ""
+			faviconUrl: "",
+			faviconImageData: "",
+			faviconMime: ""
 		}
 	}
 	

@@ -6,7 +6,9 @@ import insertBookmarkToNotebook from '../insertBookmarkToNotebook';
 export interface IInsertBoxProps {
 	title: string,
 	link: string,
-	faviconUrl: string
+	faviconUrl: string,
+	faviconImageData: string,
+	faviconMime: string
 }
 
 export default class InsertBox extends React.Component<IInsertBoxProps> {
@@ -24,7 +26,7 @@ export default class InsertBox extends React.Component<IInsertBoxProps> {
 		);
 	}
 
-	onInsertClick() {        		
-        insertBookmarkToNotebook(this.props.link, this.props.title, this.props.faviconUrl);
+	onInsertClick() {
+        insertBookmarkToNotebook(this.props.link, this.props.title, this.props.faviconUrl, this.props.faviconImageData, this.props.faviconMime);
     }
 }
