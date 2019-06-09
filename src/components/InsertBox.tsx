@@ -27,6 +27,6 @@ export default class InsertBox extends React.Component<IInsertBoxProps> {
 	}
 
 	onInsertClick() {
-        insertBookmarkToNotebook(this.props.link, this.props.title, this.props.faviconUrl, this.props.faviconImageData, this.props.faviconMime);
+        insertBookmarkToNotebook(this.props.link, this.props.title, this.props.faviconImageData, this.props.faviconMime);
     }
 }

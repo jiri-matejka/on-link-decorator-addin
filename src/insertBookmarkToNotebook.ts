@@ -1,6 +1,6 @@
 import * as OfficeHelpers from '@microsoft/office-js-helpers';
 
-const insertBookmarkToNotebook = async (link: string, title: string, faviconUrl: string, faviconData: string, faviconMime: string) => {  
+const insertBookmarkToNotebook = async (link: string, title: string, faviconData: string, faviconMime: string) => {  
 
 	try {
 		await OneNote.run(async context => {
@@ -8,8 +8,6 @@ const insertBookmarkToNotebook = async (link: string, title: string, faviconUrl:
 		   var page = context.application.getActivePage();
 			
 			page.load("contents");                
-
-			const restApiId = page.getRestApiId();
 
 			await context.sync();                
 

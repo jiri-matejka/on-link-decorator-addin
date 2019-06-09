@@ -2,7 +2,6 @@ import * as React from 'react';
 import { TextField, Label, Spinner } from 'office-ui-fabric-react';
 
 import './Preview.css';
-import { ContextReplacementPlugin } from 'webpack';
 
 export interface IPreviewStaticProps
 {

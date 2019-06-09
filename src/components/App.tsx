@@ -1,6 +1,4 @@
 import * as React from 'react';
-import { Button } from 'office-ui-fabric-react';
-import * as OfficeHelpers from '@microsoft/office-js-helpers';
 
 import Header from './Header';
 
