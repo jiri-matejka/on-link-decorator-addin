@@ -24,7 +24,15 @@ export function rootReducer(state: IAppState = initialState, action: AppActions)
 			}			
 			return {...state, fetchState: FetchState.FETCH_OK, fetchError: null, faviconData: action.faviconData, faviconMime: action.faviconMime, 
 				faviconUrl: action.faviconUrl, fetchedTitle: action.title, title: action.title, url: action.resultUrl};				
-				
+		
+		case Actions.TITLE_MODIFIED:
+			console.log("reducer title modified");
+			return {
+				...state,
+				title: action.title
+			}
+
+
 		default:
 			return state;
 	}

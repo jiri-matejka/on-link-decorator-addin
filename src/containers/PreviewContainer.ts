@@ -1,14 +1,9 @@
 import { connect } from 'react-redux'
 
 import { IAppState, FetchState } from '../stateDefinition'
-import { IPreviewStaticProps } from '../components/Preview'
+import { IPreviewStaticProps, IPreviewDispatchProps } from '../components/Preview'
 import Preview from '../components/Preview'
-
-// function mapDispatchToProps(dispatch) : IPreviewDispatchProps {
-// 	return {
-		
-// 	};
-// }
+import { titleModified } from '../actionTypes';
 
 enum ErrorCodes {
 	InvalidAddress = "InvalidAddress",
@@ -33,10 +28,16 @@ function mapStateToProps(state : IAppState) : IPreviewStaticProps {
 		faviconMime: state.faviconMime,
 		isLoading: state.fetchState === FetchState.FETCH_IN_PROGRESS,		
 		isErrored: state.fetchState === FetchState.FETCH_ERROR,
-		title : state.title === null && state.fetchState !== FetchState.FETCH_IN_PROGRESS ? state.url : state.title,
+		title : state.title === null && state.fetchState !== FetchState.FETCH_IN_PROGRESS ? state.url : (state.title || ''),
 		error: state.fetchError !== null ? mapErrorCodeToDescription(state.fetchError) : null
 	};
 }
 
-export const PreviewContainer = connect(mapStateToProps)(Preview);
+function mapDispatchToProps(dispatch) : IPreviewDispatchProps {
+	return {
+		onTitleChanged: x => dispatch(titleModified(x))
+	};
+}
+
+export const PreviewContainer = connect(mapStateToProps, mapDispatchToProps)(Preview);
 

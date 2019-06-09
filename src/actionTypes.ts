@@ -27,7 +27,7 @@ export interface IInvalidUrlEnteredAction {
 	type: Actions.INVALID_URL_ENTERED
 }
 
-export function invalidUrlEntered() {return { type: Actions.INVALID_URL_ENTERED} }
+export function invalidUrlEntered() : IInvalidUrlEnteredAction {return { type: Actions.INVALID_URL_ENTERED} }
 
 
 export interface IFaviconFetchStarted {
@@ -35,7 +35,7 @@ export interface IFaviconFetchStarted {
 	url: string
 }
 
-export function faviconFetchStarted(url: string) { return {type: Actions.FAVICON_FETCH_STARTED, url: url}}
+export function faviconFetchStarted(url: string) : IFaviconFetchStarted { return {type: Actions.FAVICON_FETCH_STARTED, url: url}}
 
 export interface IFaviconFetchFailed {
 	type: Actions.FAVICON_FETCH_FAILED,
@@ -43,7 +43,7 @@ export interface IFaviconFetchFailed {
 	error: string
 }
 
-export function faviconFetchFailed(error: string, url: string) { return {type: Actions.FAVICON_FETCH_FAILED, error: error, url: url}}
+export function faviconFetchFailed(error: string, url: string) : IFaviconFetchFailed { return {type: Actions.FAVICON_FETCH_FAILED, error: error, url: url}}
 
 export interface IFaviconFetchCompleted {
 	type: Actions.FAVICON_FETCH_COMPLETED,
@@ -55,7 +55,7 @@ export interface IFaviconFetchCompleted {
 	faviconUrl: string
 }
 
-export function faviconFetchCompleted(url: string, faviconData: string, faviconMime: string, title: string, resultUrl: string, faviconUrl: string) {
+export function faviconFetchCompleted(url: string, faviconData: string, faviconMime: string, title: string, resultUrl: string, faviconUrl: string): IFaviconFetchCompleted {
 	return {
 		type: Actions.FAVICON_FETCH_COMPLETED,
 		faviconData: faviconData,
@@ -67,5 +67,17 @@ export function faviconFetchCompleted(url: string, faviconData: string, faviconM
 	};
 }
 
-export type AppActions = IValidUrlEnteredAction | IInvalidUrlEnteredAction | IFaviconFetchStarted | IFaviconFetchFailed | IFaviconFetchCompleted;
+export interface ITitleModified {
+	type: Actions.TITLE_MODIFIED,
+	title: string
+}
+
+export function titleModified(title: string) : ITitleModified {
+	return {
+		type: Actions.TITLE_MODIFIED,
+		title: title
+	}
+}
+
+export type AppActions = IValidUrlEnteredAction | IInvalidUrlEnteredAction | IFaviconFetchStarted | IFaviconFetchFailed | IFaviconFetchCompleted | ITitleModified;
 

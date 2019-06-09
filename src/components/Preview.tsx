@@ -2,6 +2,7 @@ import * as React from 'react';
 import { TextField, Label, Spinner } from 'office-ui-fabric-react';
 
 import './Preview.css';
+import { ContextReplacementPlugin } from 'webpack';
 
 export interface IPreviewStaticProps
 {
@@ -15,7 +16,7 @@ export interface IPreviewStaticProps
 }
 
 export interface IPreviewDispatchProps {
-
+    onTitleChanged: any
 } 
 
 interface IPreviewProps extends IPreviewStaticProps, IPreviewDispatchProps 
@@ -27,6 +28,7 @@ export default class Preview extends React.Component<IPreviewProps> {
     constructor(props) {
         super(props);
         this.render = this.render.bind(this);
+        this.onChange = this.onChange.bind(this);
     }
 
     render() {        
@@ -36,7 +38,7 @@ export default class Preview extends React.Component<IPreviewProps> {
         const imgTitle = this.props.faviconData != null ? "" : "Default icon is used because the website does not provide favicon";
 
         const placeholder : string = this.props.isErrored ? `Icon not downloaded: ${this.props.error}` : (this.props.isLoading ? "Loading the icon..." : "Title of your bookmark");
-        const title : string = this.props.isErrored ? "" : (this.props.isLoading ? "" : this.props.title);
+        const title = this.props.isErrored ? "" : (this.props.isLoading ? "" : (this.props.title || ""));
 
         return  (
                 <div className="main-surface-flex-item">
@@ -48,12 +50,18 @@ export default class Preview extends React.Component<IPreviewProps> {
                         }
                         {!this.props.isLoading &&
                             <img className="preview-image" src={ src } title={imgTitle} />
-                        }
-                        <TextField className="preview-title-box" value={title} placeholder={placeholder} />
+                        }                        
+                        <TextField className="preview-title-box" key="previewTextBox"  value={title} placeholder={placeholder} onChange={this.onChange} />
                     </div>
                 
                     
                 </div>)
+    }
+    
+    onChange(event: React.FormEvent<HTMLInputElement>, newValue?: string) {
+        console.log("onChange", event);  
+        if(newValue)      
+            this.props.onTitleChanged(newValue);
     }
 
 }
