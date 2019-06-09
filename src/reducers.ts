@@ -3,28 +3,64 @@ import { Actions } from './actionTypes'
 import { AppActions } from './actionTypes'
 
 export function rootReducer(state: IAppState = initialState, action: AppActions): IAppState {
-	switch(action.type) {
+	switch (action.type) {
 		case Actions.INVALID_URL_ENTERED:
-			return {...state, urlState: UrlState.INVALID_URL_ENTERED, url: null, fetchState: FetchState.NOT_STARTED,
-				faviconData: null, faviconMime: null, faviconUrl: null, title: null, fetchedTitle: null};
+			return {
+				...state,
+				urlState: UrlState.INVALID_URL_ENTERED,
+				url: null,
+				fetchState: FetchState.NOT_STARTED,
+				faviconData: null,
+				faviconMime: null,
+				faviconUrl: null,
+				title: null,
+				fetchedTitle: null
+			};
+			
 		case Actions.VALID_URL_ENTERED:
-			return {...state, urlState: UrlState.VALID_URL_ENTERED, url: action.payload.url};
+			return {
+				...state,
+				urlState: UrlState.VALID_URL_ENTERED,
+				url: action.payload.url
+			};
+
 		case Actions.FAVICON_FETCH_STARTED:
-			return {...state, fetchState: FetchState.FETCH_IN_PROGRESS, urlBeingFetched: action.url, faviconData: null, faviconMime: null, faviconUrl: null, title: null, fetchedTitle: null};
+			return {
+				...state,
+				fetchState: FetchState.FETCH_IN_PROGRESS,
+				urlBeingFetched: action.url,
+				faviconData: null,
+				faviconMime: null,
+				faviconUrl: null,
+				title: null,
+				fetchedTitle: null
+			};
+
 		case Actions.FAVICON_FETCH_FAILED:
-			if(action.url !== state.url) { // in the meanwhile, user changed url and another fetch is in progress
+			if (action.url !== state.url) { // in the meanwhile, user changed url and another fetch is in progress
 				return state;
 			}
-			return {...state, fetchState: FetchState.FETCH_ERROR, fetchError: action.error, faviconData: null, faviconMime: null, faviconUrl: null, title: null,
-				fetchedTitle: null, urlBeingFetched: null};
+			return {
+				...state, fetchState: FetchState.FETCH_ERROR, fetchError: action.error, faviconData: null, faviconMime: null, faviconUrl: null, title: null,
+				fetchedTitle: null, urlBeingFetched: null
+			};
 
-		case Actions.FAVICON_FETCH_COMPLETED:			
-			if(action.url !== state.url) {
+		case Actions.FAVICON_FETCH_COMPLETED:
+			if (action.url !== state.url) {
 				return state;
-			}			
-			return {...state, fetchState: FetchState.FETCH_OK, fetchError: null, faviconData: action.faviconData, faviconMime: action.faviconMime, 
-				faviconUrl: action.faviconUrl, fetchedTitle: action.title, title: action.title, url: action.resultUrl};				
-		
+			}
+			return {
+				...state, 
+				fetchState: FetchState.FETCH_OK, 
+				fetchError: null, 
+				faviconData: action.faviconData, 
+				faviconMime: action.faviconMime,
+				faviconUrl: action.faviconUrl, 
+				fetchedTitle: action.title, 
+				title: action.title, 
+				url: action.resultUrl
+			};
+
 		case Actions.TITLE_MODIFIED:
 			console.log("reducer title modified");
 			return {
@@ -32,10 +68,9 @@ export function rootReducer(state: IAppState = initialState, action: AppActions)
 				title: action.title
 			}
 
-
 		default:
 			return state;
 	}
-	
+
 }
 
