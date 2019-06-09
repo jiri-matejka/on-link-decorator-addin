@@ -1,6 +1,6 @@
 import * as OfficeHelpers from '@microsoft/office-js-helpers';
 
-const insertBookmarkToNotebook = async (link: string, title: string, image: string) => {  
+const insertBookmarkToNotebook = async (link: string, title: string, faviconUrl: string) => {  
 
 	try {
 		await OneNote.run(async context => {
@@ -27,8 +27,10 @@ const insertBookmarkToNotebook = async (link: string, title: string, image: stri
 							
 			//console.log("outline id is " + outline.id);
 			//outline.load("paragraphs");
-
-			outline.appendHtml(`<table border=\"1\"><tr><td>first cell</td><td><a href="${link}">${title}</a></td></table>`);			
+			//data:${imageMimeType};base64,${image}
+			
+			outline.appendHtml(
+				`<table border=\"1\"><tr><td><img src="${faviconUrl}" width="16" height="16"></td><td><a href="${link}">${title}</a></td></table>`);			
 
 		  return context.sync();
 		});

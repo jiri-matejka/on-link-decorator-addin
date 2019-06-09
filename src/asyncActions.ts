@@ -35,6 +35,7 @@ export function fetchFavicon(url: string) {
 				const faviconMime = response.FaviconMime;
 				const title = response.Title;
 				const resultUrl = response.ResultUrl;
+				const faviconUrl = response.FaviconUrl;
 
 				if(error !== "") {
 					dispatch(faviconFetchFailed(error, url));
@@ -42,7 +43,7 @@ export function fetchFavicon(url: string) {
 					return;
 				}
 				
-				dispatch(faviconFetchCompleted(url, faviconData, faviconMime, title, resultUrl));
+				dispatch(faviconFetchCompleted(url, faviconData, faviconMime, title, resultUrl, faviconUrl));
 
 				// if(faviconData !== undefined) {
 				// 	this.props.onFaviconObtained(faviconData, faviconMime, title);

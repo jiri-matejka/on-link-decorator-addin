@@ -20,7 +20,8 @@ export interface IAppState {
 	title: string,
 	fetchedTitle: string,
 	faviconData: string,
-	faviconMime: string	
+	faviconMime: string,
+	faviconUrl: string	
 }
 
 export const initialState : IAppState = {
@@ -32,6 +33,7 @@ export const initialState : IAppState = {
 	title: null,
 	fetchedTitle: null,
 	faviconData: null,
-	faviconMime: null
+	faviconMime: null,
+	faviconUrl: null
 }
 

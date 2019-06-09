@@ -51,17 +51,19 @@ export interface IFaviconFetchCompleted {
 	faviconData: string,
 	faviconMime: string,
 	title: string,
-	resultUrl: string
+	resultUrl: string,
+	faviconUrl: string
 }
 
-export function faviconFetchCompleted(url: string, faviconData: string, faviconMime: string, title: string, resultUrl: string) {
+export function faviconFetchCompleted(url: string, faviconData: string, faviconMime: string, title: string, resultUrl: string, faviconUrl: string) {
 	return {
 		type: Actions.FAVICON_FETCH_COMPLETED,
 		faviconData: faviconData,
 		faviconMime: faviconMime,
 		title: title,
 		url: url,
-		resultUrl: resultUrl
+		resultUrl: resultUrl,
+		faviconUrl: faviconUrl
 	};
 }
 

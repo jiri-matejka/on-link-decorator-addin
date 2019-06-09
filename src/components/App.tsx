@@ -6,10 +6,10 @@ import Header from './Header';
 
 import { UrlBoxContainer } from '../containers/UrlBoxContainer';
 import { PreviewContainer } from '../containers/PreviewContainer';
-
-import insertBookmarkToNotebook from '../insertBookmarkToNotebook';
+import { InsertBoxContainer } from '../containers/InsertBoxContainer';
 
 import './AppStyles.css'
+import InsertBox from './InsertBox';
 
 export interface AppProps {   
     isOfficeInitialized: boolean;
@@ -23,10 +23,6 @@ export default class App extends React.Component<AppProps> {
 
     componentDidMount() {
     }
-   
-    onInsertClick() {        
-        insertBookmarkToNotebook("https://www.seznam.cz", "Test", "data");
-    }
 
     render() {
         return (
@@ -34,7 +30,7 @@ export default class App extends React.Component<AppProps> {
                 <Header/>
                 <UrlBoxContainer/>
                 <PreviewContainer/>                
-                <Button primary text="Insert" className="app-primary-button main-surface-flex-item" onClick={this.onInsertClick} />
+                <InsertBoxContainer />
             </div>
         );
     }
