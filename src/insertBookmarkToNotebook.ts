@@ -30,7 +30,7 @@ const insertBookmarkToNotebook = async (link: string, title: string, faviconUrl:
 			//data:${imageMimeType};base64,${image}
 			
 			outline.appendHtml(
-				`<table border=\"1\"><tr><td><img src="data:${faviconMime};base64,${faviconData}" width="16" height="16"></td><td><a href="${link}">${title}</a></td></table>`);			
+				`<table border=\"0\"><tr><td><img src="data:${faviconMime};base64,${faviconData}" width="16" height="16"></td><td><a href="${link}">${title}</a></td></table>`);			
 
 		  return context.sync();
 		});
