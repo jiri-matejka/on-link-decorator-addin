@@ -7,6 +7,8 @@ import Header from './Header';
 import { UrlBoxContainer } from '../containers/UrlBoxContainer';
 import { PreviewContainer } from '../containers/PreviewContainer';
 
+import insertBookmarkToNotebook from '../insertBookmarkToNotebook';
+
 import './AppStyles.css'
 
 export interface AppProps {   
@@ -21,20 +23,9 @@ export default class App extends React.Component<AppProps> {
 
     componentDidMount() {
     }
-
-    click = async () => {
-        try {
-            await OneNote.run(async context => {      
-                return context.sync();
-            });
-        } catch(error) {
-            OfficeHelpers.UI.notify(error);
-            OfficeHelpers.Utilities.log(error);
-        };
-    }
-
-    onInsertClick() {
-
+   
+    onInsertClick() {        
+        insertBookmarkToNotebook("https://www.seznam.cz", "Test", "data");
     }
 
     render() {
