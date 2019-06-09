@@ -43,7 +43,7 @@ export interface IFaviconFetchFailed {
 	error: string
 }
 
-export function faviconFetchFailed(url: string, error: string) { return {type: Actions.FAVICON_FETCH_FAILED, error: error, url: url}}
+export function faviconFetchFailed(error: string, url: string) { return {type: Actions.FAVICON_FETCH_FAILED, error: error, url: url}}
 
 export interface IFaviconFetchCompleted {
 	type: Actions.FAVICON_FETCH_COMPLETED,
