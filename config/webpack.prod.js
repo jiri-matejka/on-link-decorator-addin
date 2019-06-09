@@ -28,5 +28,8 @@ module.exports = webpackMerge(commonConfig, {
             },
             comments: false
         })
-    ]
+    ],
+    externals: {
+        'Config': JSON.stringify(require('./config.prod.json'))
+    }
 });

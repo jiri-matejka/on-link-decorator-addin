@@ -1,5 +1,7 @@
 import { faviconFetchStarted, faviconFetchFailed, faviconFetchCompleted } from './actionTypes'
 
+let Config = require('Config');
+
 function postWithData (url = ``, data = {}) {
 	// Default options are marked with *
 	  return fetch(url, {
@@ -24,7 +26,7 @@ export function fetchFavicon(url: string) {
 		
 		dispatch(faviconFetchStarted(url));
 
-		postWithData("https://onenoteutilities/AddinServices/api/pageinfo", { address: url })
+		postWithData(`https://${Config.ApiServer}/AddinServices/api/pageinfo`, { address: url })
 				.then(function(response) {
 				if(response === undefined) {
 					dispatch(faviconFetchFailed("No favicon found", url));
